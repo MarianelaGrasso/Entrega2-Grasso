@@ -98,7 +98,6 @@ const productos = [
 
         contenedorProductos.appendChild(div);
 
-        // Evento al botón
         document
             .getElementById(`btn-${producto.id}`)
             .addEventListener("click", () => {
@@ -133,7 +132,7 @@ function calcularTotal() {
 document.getElementById("vaciar").addEventListener("click", () => {
     carrito = [];
     localStorage.removeItem("carrito");
-    mostrarCarrito(); // ← refresco
+    mostrarCarrito(); 
 });
 
 
