@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entregable 2 Marianela Grasso</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body> 
 
@@ -20,26 +21,30 @@
 
     <h2>Estamos en constante producción!</h2>
 
-            <!-- BUSCADOR -->
         <input type="text" id="buscador" placeholder="Buscar vela por nombre">
 
-            <!-- PRODUCTOS -->
         <section id="contenedor-productos"></section>
 
-            <!-- CARRITO -->
         <section id="seccion-carrito">
-            <h2>🛒 Carrito</h2>
-            <ul id="carrito"></ul>
+            <h2>Carrito</h2>
+            <div id="carrito"></div>
             <p id="total">Total: $0</p>
         </section>
 
         <button id="vaciar">Vaciar carrito</button>
+            <br>
+        <button id="pagar" class = "boton-pago" >Ir a pagar</button>
 
     </main>
 
     <footer>
         <div>
-        <ul>
+            <style>
+                ul.sin-puntos {
+                list-style: none;
+                }
+            </style>
+        <ul class="sin-puntos">
             <li>Instagram @EmDeSuCandle</li>
             <li>Facebook Candle EmDeSu</li>
             <li>X @EmDeSu0606</li>
@@ -49,7 +54,9 @@
     </footer>
 
 
-    <script src="main.js"></script>
+    <script src="/js/main.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 </html>

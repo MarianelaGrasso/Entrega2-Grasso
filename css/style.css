@@ -49,3 +49,48 @@ button {
     object-fit: cover;
     margin-bottom: 10px;
 }
+
+.img-carrito {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 10px;
+    margin-top: 10px;
+    display: flex;
+}
+
+#carrito div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.remove {
+    margin-left: auto;
+    background-color: #b6594f;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    position: static;
+} 
+
+.remove:hover {
+    background-color: #d32916;
+}
+
+.boton-pago {
+    background-color: #f8f6f6;
+    color: #060606;
+    border: none;
+    border-radius: 10px;
+    margin-top: 30px;
+    padding: 8px;
+    cursor: pointer;
+}
+

@@ -72,7 +72,7 @@ const productos = [
     {
         id: 10,
         nombre: "Velas Minimal",
-        descripcion: "Aroma cueros y maderas",
+        descripcion: "Aroma cuero y maderas",
         precio: 5000,
         imagen: "images/cemento.jpg"
     }
@@ -88,52 +88,124 @@ const productos = [
     productos.forEach((producto) => {
         const div = document.createElement("div");
 
-        div.innerHTML = `
-            <img src="${producto.imagen}" alt="${producto.nombre}">
-            <h3>${producto.nombre}</h3>
-            <p>${producto.descripcion}</p>
-            <p>$${producto.precio}</p>
-            <button id="btn-${producto.id}">Agregar al carrito</button>
-        `;
+        div.innerHTML = `<img src="${producto.imagen}" alt="${producto.nombre}">
+        <h3>${producto.nombre}</h3>
+        <p>${producto.descripcion}</p>
+        <p>$${producto.precio}</p>
+        <button id="btn-${producto.id}">Agregar al carrito</button>`;
 
         contenedorProductos.appendChild(div);
 
-        document
-            .getElementById(`btn-${producto.id}`)
-            .addEventListener("click", () => {
-                agregarAlCarrito(producto);
-            });
+        document.getElementById(`btn-${producto.id}`).addEventListener("click", () => {
+            agregarAlCarrito(producto);
+        });
     });
 }
+
 
 function agregarAlCarrito(producto) {
     carrito.push(producto);
     localStorage.setItem("carrito", JSON.stringify(carrito));
+    
+    Toastify({
+        text: "Agregado con éxito!",
+        duration: 3000,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+            background: "linear-gradient(to left, #515858, #232423)",
+    },
+        onClick: function(){}
+    }).showToast();
+
     mostrarCarrito();
-}
+
+    }
+
 
 function mostrarCarrito() {
     carritoHTML.innerHTML = "";
 
-    carrito.forEach((prod) => {
-        const li = document.createElement("li");
-        li.textContent = `${prod.nombre} - $${prod.precio}`;
-        carritoHTML.appendChild(li);
+    carrito.forEach((item) => {
+        const div = document.createElement("div");
+
+        div.innerHTML= `<img src="${item.imagen}" class="img-carrito">
+        <h3>${item.nombre}</h3>
+        <button class="remove">Eliminar del carrito</button>`
+
+        div.querySelector(".remove").addEventListener("click", () => {
+            eliminarDelCarrito(item.id);
+
     });
 
+    carritoHTML.appendChild(div);
+
     calcularTotal();
+
 }
+    )}
 
 function calcularTotal() {
     const total = carrito.reduce((acc, prod) => acc + prod.precio, 0);
     totalHTML.textContent = `Total: $${total}`;
+
 }
+
+
+function eliminarDelCarrito(idProducto) {
+    carrito = carrito.filter(item => item.id !== idProducto);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    mostrarCarrito();
+
+Swal.fire({
+    title: `Eliminar este producto?`,
+    text: ``,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Eliminar"
+}).then((result) => {
+    if (result.isConfirmed) {
+    Swal.fire({
+    title: "El producto fue eliminado",
+    text: "",
+    icon: "success"
+    });
+
+    }
+}); 
+
+}
+
 
 document.getElementById("vaciar").addEventListener("click", () => {
     carrito = [];
     localStorage.removeItem("carrito");
     mostrarCarrito(); 
 });
+
+document.getElementById("pagar").addEventListener("click", pagar);
+
+function pagar(){
+    if (carrito.length === 0) {
+    Swal.fire({
+    title: "Su carrito esta vacío, agregue algún producto",
+    icon: "warning",
+    draggable: true
+});
+    } else{
+        Swal.fire({
+        title: "Procedemos con el pago! <br> Ya casi es tuyo!",
+        icon: "success",
+        draggable: true
+});
+    }
+}
 
 
 mostrarProductos();
